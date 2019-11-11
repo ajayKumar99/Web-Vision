@@ -103,3 +103,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 slices/*
+service-account-file.json
+
