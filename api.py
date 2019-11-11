@@ -12,7 +12,7 @@ import os
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "slices/service-account-file.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "~/Downloads/auth-key.json"
 
 dom_mapper = {
     'Button':'<button style="width:100%;height:100%;" type="button" class="btn btn-info">{}</button>',
