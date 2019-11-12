@@ -1,11 +1,12 @@
 from flask import Flask , render_template , request , redirect , url_for , session , send_file
 from werkzeug import secure_filename
 from google.cloud import vision
-from PIL import Image
-import io
 import cloudinary
 import cloudinary.api
 import cloudinary.uploader
+
+from PIL import Image
+import io
 import requests
 import json
 import os
@@ -16,6 +17,14 @@ auth_file = 'Downloads/.flask_key'
 ptr = open(os.path.join(home , auth_file), 'r')
 app.secret_key = ptr.read()
 ptr.close()
+
+vision_auth_file = 'Downloads/vision-auth.json'
+ptr = open(os.path.join(home , vision_auth_file) , 'r')
+vision_auth = json.loads(ptr.read())
+ptr.close()
+
+prediction_key = vision_auth['training_key']
+ENDPOINT = vision_auth['ENDPOINT']
 
 dom_mapper = {
     'Button':'<button style="width:100%;height:100%;" type="button" class="btn btn-info">{}</button>',
@@ -55,7 +64,7 @@ def generate():
 
     json_headers = {
         'Content-Type':'application/json',
-        'Prediction-Key':'467bb7cbcc1f4f0cb7a97895f0029b80',
+        'Prediction-Key':prediction_key
     }
 
     data = {
