@@ -15,8 +15,7 @@ home = os.path.expanduser('~')
 auth_file = 'Downloads/.flask_key'
 ptr = open(os.path.join(home , auth_file), 'r')
 app.secret_key = ptr.read()
-auth_file_location = 'Downloads/auth-key.json'
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(home , auth_file_location)
+ptr.close()
 
 dom_mapper = {
     'Button':'<button style="width:100%;height:100%;" type="button" class="btn btn-info">{}</button>',
@@ -30,17 +29,6 @@ dom_mapper = {
     'RadioButton':'<input type="radio" name="AI" value="test" style="width:100%;height:100%;" class="form-control" aria-describedby="basic-addon1"> {}<br>',
     'TextBox':'<input type="text" name="test" style="width:100%;height:100%;" class="form-control" aria-describedby="basic-addon1"><br>'
 }
-
-cloudinary_auth_file = 'Downloads/cloudinary-auth.json'
-ptr = open(os.path.join(home , cloudinary_auth_file) , 'r')
-cloudinary_auth = json.loads(ptr.read())
-ptr.close()
-
-cloudinary.config( 
-  cloud_name = cloudinary_auth['cloud_name'], 
-  api_key = cloudinary_auth['api_key'], 
-  api_secret = cloudinary_auth['api_secret'] 
-)
 
 text_mapper = {}
 
@@ -137,4 +125,24 @@ def result():
 
 
 if __name__ == '__main__':
+    
+    #Google Authentication 
+    auth_file_location = 'Downloads/auth-key.json'  #Replace with your auth file location
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(home , auth_file_location)
+
+    #Cloudinary Authentication
+    cloudinary_auth_file = 'Downloads/cloudinary-auth.json' #Replace with your auth file location
+    ptr = open(os.path.join(home , cloudinary_auth_file) , 'r')
+    cloudinary_auth = json.loads(ptr.read())
+    ptr.close()
+    cloudinary.config( 
+    cloud_name = cloudinary_auth['cloud_name'], 
+    api_key = cloudinary_auth['api_key'], 
+    api_secret = cloudinary_auth['api_secret'] 
+    )
+
+    #Slices folder for OCR
+    if not os.path.isdir('slices'):
+        os.mkdir('slices')
+
     app.run(debug=True)
