@@ -45,7 +45,10 @@
                     <object data="{{url_for('generate_template')}}" type="text/html" width="100%" height="100%"></object>
                 </div>
             </div>
-            <button class="btn btn-success" onclick="window.open('http://127.0.0.1:5000/generated_template' , '_blank');">Start Editing</button>
+            <br>
+                <a href="http://127.0.0.1:5000/download_document" download><button class="btn btn-dark" style="width: 100%;">Download HTML document</button></a>
+                <br>
+                <button class="btn btn-success" onclick="window.open('http://127.0.0.1:5000/generated_template' , '_blank');">Start Editing</button>
         </div>
     </main>
 </body>

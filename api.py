@@ -1,4 +1,4 @@
-from flask import Flask , render_template , request , redirect , url_for , session
+from flask import Flask , render_template , request , redirect , url_for , session , send_file
 from werkzeug import secure_filename
 from google.cloud import vision
 from PIL import Image
@@ -111,6 +111,10 @@ def generate():
 def generate_template():
     return render_template('generated/generated_template.html')
 
+@app.route('/download_document')
+def download_document():
+    return send_file('templates/generated/generated_template.html' , as_attachment=True , attachment_filename='output.html' , mimetype='application/download')
+
 @app.route('/result')
 def result():
     #Delete slices
@@ -125,7 +129,7 @@ def result():
 
 
 if __name__ == '__main__':
-    
+
     #Google Authentication 
     auth_file_location = 'Downloads/auth-key.json'  #Replace with your auth file location
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(home , auth_file_location)
