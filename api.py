@@ -11,29 +11,35 @@ import json
 import os
 
 app = Flask(__name__)
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 home = os.path.expanduser('~')
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(home , 'Downloads/auth-key.json')
+auth_file = 'Downloads/.flask_key'
+ptr = open(os.path.join(home , auth_file), 'r')
+app.secret_key = ptr.read()
+auth_file_location = 'Downloads/auth-key.json'
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(home , auth_file_location)
 
 dom_mapper = {
     'Button':'<button style="width:100%;height:100%;" type="button" class="btn btn-info">{}</button>',
     'CheckBox':'<input type="checkbox" name="test-box" value="test" style="width:50%;height:50%;" class="form-control" aria-describedby="basic-addon1"> {}<br>',
-    'ComboBox':'<select><option value="test" style="width:100%;height:100%;">artificial option</option></select>',
+    'ComboBox':'<select><option value="test" style="width:100%;height:100%;">{}</option></select>',
     'Heading':'<h1>{}</h1>',
-    'Image':'<img src="static/sample.jpg" style="max-width:100%;max-height:100%;" alt="AI Image">',
+    'Image':'<img src="static/sample.jpg" style="max-width:100%;max-height:100%;" alt="{}">',
     'Label':'<label class="font-weight-bold">{}</label>',
-    'Link':'',
-    'Paragraph':'<p class="text-justify">Artificial paragraph....shasajnfafjfo safjajsn ahsf aushf asuihf aisfh asufaisf aif iasuhf iaushf asiufhaisufha faushfiausfha auhfiaus</p>',
+    'Link':'<a href="#"><!--{}--></a>',
+    'Paragraph':'<p class="text-justify">Artificial paragraph {} hasajnfafjfo safjajsn ahsf aushf asuihf aisfh asufaisf aif iasuhf iaushf asiufhaisufha faushfiausfha auhfiaus</p>',
     'RadioButton':'<input type="radio" name="AI" value="test" style="width:100%;height:100%;" class="form-control" aria-describedby="basic-addon1"> {}<br>',
     'TextBox':'<input type="text" name="test" style="width:100%;height:100%;" class="form-control" aria-describedby="basic-addon1"><br>'
 }
 
-element_annoter = 0
+cloudinary_auth_file = 'Downloads/cloudinary-auth.json'
+ptr = open(os.path.join(home , cloudinary_auth_file) , 'r')
+cloudinary_auth = json.loads(ptr.read())
+ptr.close()
 
 cloudinary.config( 
-  cloud_name = "webvision", 
-  api_key = "968156139689816", 
-  api_secret = "JG9zEdCNyOyheg_GsVx75XRHODw" 
+  cloud_name = cloudinary_auth['cloud_name'], 
+  api_key = cloudinary_auth['api_key'], 
+  api_secret = cloudinary_auth['api_secret'] 
 )
 
 text_mapper = {}
