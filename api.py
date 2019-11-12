@@ -45,11 +45,11 @@ text_mapper = {}
 def index():
     return render_template('index.html')
 
-@app.route('/generate' , methods=['POST' , 'GET'])
-def generate():
+@app.route('/generate/<api>' , methods=['POST' , 'GET'])
+def generate(api):
     styles = '<style>.test{position: fixed;overflow:hidden;}'
     image_url = "https://sketch2code.azurewebsites.net/Content/img/sampleDesigns/sample2.jpg"
-    if request.method == 'POST':
+    if request.method == 'POST' and int(api) == 0:
         image_url = request.form['url']
         image_file = request.files['file']
         if image_url == '' and image_file.filename == '':
@@ -61,6 +61,8 @@ def generate():
             image_url = result.url
             session['public-id'] = result.public_id
             os.remove(os.getcwd() + '/' + image_file.filename)
+    elif request.method == 'POST' and int(api) == 1:
+        image_url = request.get_json()['url']
 
     json_headers = {
         'Content-Type':'application/json',
@@ -88,6 +90,8 @@ def generate():
         width = pred['boundingBox']['width']
         height = pred['boundingBox']['height']
         inter = 'left:{}%;top:{}%;width:{}%;height:{}%;'.format(left*100 , top*100 , width*100 , height*100)
+        if pred['tagName'] == 'Heading' or pred['tagName'] == 'Label':
+            inter = inter + 'min-height:-webkit-fill-available;min-width:-webkit-fill-available;'
         x = '#element-'+str(valid_predictions.index(pred))+'{' + inter + '}'
         styles = styles + x
 
@@ -114,6 +118,8 @@ def generate():
     ptr.write(generated_code)
     ptr.close()
     print('File Generated')
+    if int(api) == 1:
+        return generated_code
     return redirect(url_for('result'))
 
 @app.route('/generated_template')
