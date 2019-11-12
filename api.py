@@ -125,6 +125,14 @@ def generate_template():
 
 @app.route('/result')
 def result():
+    #Delete slices
+    for slice in os.listdir('slices/'):
+        path = os.path.join('slices/' , slice)
+        try:
+            if os.path.isfile(path):
+                os.unlink(path)
+        except Exception as e:
+            pass
     return render_template('result.html' , url=session['url'])
 
 
