@@ -3,8 +3,14 @@ from azure.cognitiveservices.vision.customvision.training.models import ImageFil
 import os
 import json
 
-training_key = "467bb7cbcc1f4f0cb7a97895f0029b80"
-ENDPOINT = "https://westus2.api.cognitive.microsoft.com/"
+home = os.path.expanduser('~')
+vision_auth_file = 'Downloads/vision-auth.json'
+ptr = open(os.path.join(home , vision_auth_file) , 'r')
+vision_auth = json.loads(ptr.read())
+ptr.close()
+
+training_key = vision_auth['training_key']
+ENDPOINT = vision_auth['ENDPOINT']
 
 trainAPI = CustomVisionTrainingClient(training_key , ENDPOINT)
 
