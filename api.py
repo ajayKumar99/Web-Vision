@@ -29,7 +29,7 @@ ENDPOINT = vision_auth['ENDPOINT']
 dom_mapper = {
     'Button':'<button style="width:100%;height:100%;" type="button" class="btn btn-info">{}</button>',
     'CheckBox':'<input type="checkbox" name="test-box" value="test" style="width:50%;height:50%;" class="form-control" aria-describedby="basic-addon1"> {}<br>',
-    'ComboBox':'<select><option value="test" style="width:100%;height:100%;">{}</option></select>',
+    'ComboBox':'<div class="dropdown"><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{}</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Action</a></div></div>',
     'Heading':'<h1>{}</h1>',
     'Image':'<img src="static/sample.jpg" style="max-width:100%;max-height:100%;" alt="{}">',
     'Label':'<label class="font-weight-bold">{}</label>',
@@ -47,7 +47,7 @@ def index():
 
 @app.route('/generate/<api>' , methods=['POST' , 'GET'])
 def generate(api):
-    styles = '<style>.test{position: fixed;overflow:hidden;}'
+    styles = '<style>.test{position: fixed;}'
     image_url = "https://sketch2code.azurewebsites.net/Content/img/sampleDesigns/sample2.jpg"
     if request.method == 'POST' and int(api) == 0:
         image_url = request.form['url']
@@ -73,13 +73,13 @@ def generate(api):
         "Url": image_url,
     }
 
-    res = requests.post('https://westus2.api.cognitive.microsoft.com/customvision/v3.0/Prediction/ddfbbef3-9278-4ff4-86a8-ffafaa38893f/detect/iterations/web-vision-v3/url' , data=json.dumps(data) , headers=json_headers)
+    res = requests.post('https://westus2.api.cognitive.microsoft.com/customvision/v3.0/Prediction/ddfbbef3-9278-4ff4-86a8-ffafaa38893f/detect/iterations/Iteration5/url' , data=json.dumps(data) , headers=json_headers)
 
     session['url'] = image_url
     predictions = json.loads(res.text)['predictions']
 
     valid_predictions = [prediction for prediction in predictions if prediction['probability'] > 0.15]
-
+    valid_predictions = sorted(valid_predictions , key = lambda k:k['probability'])
     print(len(valid_predictions))
     response = requests.get(image_url)
     img = Image.open(io.BytesIO(response.content))
@@ -89,9 +89,12 @@ def generate(api):
         top = pred['boundingBox']['top']
         width = pred['boundingBox']['width']
         height = pred['boundingBox']['height']
-        inter = 'left:{}%;top:{}%;width:{}%;height:{}%;'.format(left*100 , top*100 , width*100 , height*100)
+        if pred['tagName'] == 'Heading' or pred['tagName'] == 'Label' or pred['tagName'] == 'Combobox':
+            inter = 'left:{}%;top:{}%;width:{};height:{};'.format(left*100 , top*100 , 'auto' , 'auto')
+        else:
+            inter = 'left:{}%;top:{}%;width:{}%;height:{}%;'.format(left*100 , top*100 , width*100 , height*100)
         if pred['tagName'] == 'Heading' or pred['tagName'] == 'Label':
-            inter = inter + 'min-height:-webkit-fill-available;min-width:-webkit-fill-available;'
+            inter = inter + 'min-height:fit-content;min-width:fit-content;'
         x = '#element-'+str(valid_predictions.index(pred))+'{' + inter + '}'
         styles = styles + x
 
