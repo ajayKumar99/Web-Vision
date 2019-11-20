@@ -15,3 +15,14 @@
 </div>
 {% endfor %}
 {% endblock %}
+{% block script %}
+<script>
+    var selected_id = ""
+    var obj = document.getElementsByClassName("test")
+    for (var i = 0; i < obj.length; i++) {
+        obj[i].onclick = function () {
+            parent.display_id(this.id);
+        }
+    }
+</script>
+{% endblock %}

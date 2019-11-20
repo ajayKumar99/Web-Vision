@@ -133,6 +133,10 @@ def generate_template():
 def download_document():
     return send_file('templates/generated/generated_template.html' , as_attachment=True , attachment_filename='output.html' , mimetype='application/download')
 
+@app.route('/web_vision_toolkit')
+def web_vision_toolkit():
+    return render_template('toolkit.html')
+
 @app.route('/result')
 def result():
     #Delete slices
