@@ -96,6 +96,7 @@ def generate(api):
         if pred['tagName'] == 'Heading' or pred['tagName'] == 'Label':
             inter = inter + 'min-height:fit-content;min-width:fit-content;'
         x = '#element-'+str(valid_predictions.index(pred))+'{' + inter + '}'
+        y = '#element-'+str(valid_predictions.index(pred))+':hover{cursor:move;}'
         styles = styles + x
 
         if pred['tagName'] == "Heading" or pred['tagName'] == "Label" or pred['tagName'] == "Button" or pred['tagName'] == "CheckBox" or pred['tagName'] == 'RadioButton':

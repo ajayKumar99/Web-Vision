@@ -183,6 +183,10 @@
             console.log(html_doc_elem.style[id])
         }
 
+        function drag_handler(){
+            console.log("debug")
+        }
+
         var sliders = document.getElementsByClassName("mdl-slider")
         for (var i = 0; i < sliders.length; i++) {
             sliders[i].oninput = function () {

@@ -25,7 +25,7 @@
     <title>Web Vision</title>
 
     
-<style>.test{position: fixed;}#element-0{left:4.55836058%;top:51.249449999999996%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-1{left:4.88226563%;top:44.0730929%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-2{left:23.0400443%;top:51.60556%;width:14.796352400000002%;height:5.46250343%;}#element-3{left:22.0434219%;top:10.2609441%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-4{left:13.5056958%;top:63.239250000000006%;width:13.9966384%;height:6.675351%;}#element-5{left:4.7923848%;top:36.434689999999996%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-6{left:24.08931%;top:23.7053961%;width:20.365983200000002%;height:7.331154%;}#element-7{left:19.0411866%;top:43.8973933%;width:36.46031%;height:5.6366384%;}#element-8{left:6.1072880000000005%;top:23.310062300000002%;width:16.9334441%;height:8.722058%;}#element-9{left:20.7536042%;top:35.941410000000005%;width:37.63979%;height:6.19232953%;}</style>
+<style>.test{position: fixed;}#element-0{left:14.108055799999999%;top:73.06962999999999%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-1{left:45.2361524%;top:73.6698568%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-2{left:12.7720982%;top:63.46848000000001%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-3{left:12.5570029%;top:83.5682154%;width:66.4120555%;height:11.58306%;}#element-4{left:10.2108613%;top:40.664735400000005%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-5{left:14.492833599999999%;top:15.866530000000001%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-6{left:14.160984800000001%;top:26.1305183%;width:74.9574065%;height:9.543216000000001%;}#element-7{left:12.9185289%;top:48.312149999999995%;width:78.55581000000001%;height:11.290907899999999%;}#element-8{left:11.5676194%;top:2.97704786%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}</style>
 
 </head>
 
@@ -39,43 +39,44 @@
 
 <div class="test" id="element-0">
     
-    <label class="font-weight-bold">Gender:</label>
+    <label class="font-weight-bold">Forgot Password</label>
     
 </div>
 
 <div class="test" id="element-1">
     
-    <label class="font-weight-bold">Unrecognized Text</label>
+    <label class="font-weight-bold">Password</label>
     
 </div>
 
 <div class="test" id="element-2">
     
-    <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unrecognized Text</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Action</a></div></div>
+    <label class="font-weight-bold">♡ Remember me</label>
     
 </div>
 
 <div class="test" id="element-3">
     
-    <h1>PRODUCT NAME</h1>
+    <button style="width:100%;height:100%;" type="button" class="btn btn-info">I
+LOGIN</button>
     
 </div>
 
 <div class="test" id="element-4">
     
-    <button style="width:100%;height:100%;" type="button" class="btn btn-info">سطل</button>
+    <label class="font-weight-bold">Password</label>
     
 </div>
 
 <div class="test" id="element-5">
     
-    <label class="font-weight-bold">Name:</label>
+    <label class="font-weight-bold">Login</label>
     
 </div>
 
 <div class="test" id="element-6">
     
-    <button style="width:100%;height:100%;" type="button" class="btn btn-info">Login</button>
+    <input type="text" name="test" style="width:100%;height:100%;" class="form-control" aria-describedby="basic-addon1"><br>
     
 </div>
 
@@ -87,13 +88,8 @@
 
 <div class="test" id="element-8">
     
-    <button style="width:100%;height:100%;" type="button" class="btn btn-info">Home</button>
-    
-</div>
-
-<div class="test" id="element-9">
-    
-    <input type="text" name="test" style="width:100%;height:100%;" class="form-control" aria-describedby="basic-addon1"><br>
+    <h1>Login
+Sign Up</h1>
     
 </div>
 
@@ -108,6 +104,41 @@
     for (var i = 0; i < obj.length; i++) {
         obj[i].onclick = function () {
             parent.display_id(this.id);
+        }
+        drag_handler(document.getElementById(obj[i].id));
+    }
+    //drag_handler(document.getElementById("element-0"))
+
+    function drag_handler(component){
+        var pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
+        component.onmousedown = drag_handler_util;
+
+        function drag_handler_util(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+
+            document.onmouseup = drag_halt_handler;
+            document.onmousemove = comp_drag_handler;
+        }
+
+        function comp_drag_handler(e) {
+            e = e || window.event;
+            e.preventDefault();
+
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+
+            component.style.top = (component.offsetTop - pos2) + "px";
+            component.style.left = (component.offsetLeft - pos1) + "px";
+        }
+
+        function drag_halt_handler() {
+            document.onmouseup = null;
+            document.onmousemove = null;
         }
     }
 </script>
