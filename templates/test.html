@@ -23,6 +23,34 @@
         obj[i].onclick = function () {
             parent.display_id(this.id);
         }
+        drag_handler(document.getElementById(obj[i].id))
+    }
+
+    function drag_handler(component) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        component.onmousedown = drag_handler_util;
+        function drag_handler_util(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = drag_exit_handler;
+            document.onmousemove = drag_event_handler;
+        }
+        function drag_event_handler(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            component.style.top = (component.offsetTop - pos2) + "px";
+            component.style.left = (component.offsetLeft - pos1) + "px";
+        }
+        function drag_exit_handler() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
     }
 </script>
 {% endblock %}

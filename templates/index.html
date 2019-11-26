@@ -54,7 +54,7 @@
 <br>
 <div class="container">
     <div class="index">
-        <form action="http://127.0.0.1:5000/generate/0" method="post" enctype="multipart/form-data">
+        <form action="http://127.0.0.1:5000/generate/0" method="post" enctype="multipart/form-data" id="sub_form">
             Image URL <input type="text" name="url" id="url" class="form-control" aria-describedby="basic-addon1"><br>
             <center><b>OR</b><br><br></center>
             <div class="custom-file">
@@ -64,16 +64,23 @@
             <br>
             <br>
             <div class="button_holder">
-                <input type="submit" value="Go" class="btn btn-outline-warning btn-lg" style="width: 10%;">
+                <input type="submit" value="Go" class="btn btn-outline-warning btn-lg" style="width: 10%;" id="enter">
             </div>
         </form>
     </div>
 </div>
+
 <script>
-    // Add the following code if you want the name of the file appear on select
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    var but = document.getElementById("enter");
+    var sub_form = document.getElementById("sub_form");
+    but.onclick = function () {
+        but.outerHTML = '<div class="spinner-border text-warning"></div>'
+        sub_form.submit();
+    }
 </script>
 {% endblock %}

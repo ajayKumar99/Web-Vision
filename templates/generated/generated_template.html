@@ -25,7 +25,7 @@
     <title>Web Vision</title>
 
     
-<style>.test{position: fixed;}#element-0{left:14.108055799999999%;top:73.06962999999999%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-0:hover{cursor:move;}#element-1{left:45.2361524%;top:73.6698568%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-1:hover{cursor:move;}#element-2{left:12.7720982%;top:63.46848000000001%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-2:hover{cursor:move;}#element-3{left:12.5570029%;top:83.5682154%;width:66.4120555%;height:11.58306%;}#element-3:hover{cursor:move;}#element-4{left:10.2108613%;top:40.664735400000005%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-4:hover{cursor:move;}#element-5{left:14.492833599999999%;top:15.866530000000001%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-5:hover{cursor:move;}#element-6{left:14.160984800000001%;top:26.1305183%;width:74.9574065%;height:9.543216000000001%;}#element-6:hover{cursor:move;}#element-7{left:12.9185289%;top:48.312149999999995%;width:78.55581000000001%;height:11.290907899999999%;}#element-7:hover{cursor:move;}#element-8{left:11.5676194%;top:2.97704786%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-8:hover{cursor:move;}</style>
+<style>.test{position: fixed;}#element-0{left:4.55836058%;top:51.249449999999996%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-0:hover{cursor:move;}#element-1{left:4.88226563%;top:44.0730929%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-1:hover{cursor:move;}#element-2{left:23.0400443%;top:51.60556%;width:14.796352400000002%;height:5.46250343%;}#element-2:hover{cursor:move;}#element-3{left:22.0434219%;top:10.2609441%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-3:hover{cursor:move;}#element-4{left:13.5056958%;top:63.239250000000006%;width:13.9966384%;height:6.675351%;}#element-4:hover{cursor:move;}#element-5{left:4.7923848%;top:36.434689999999996%;width:auto;height:auto;min-height:fit-content;min-width:fit-content;}#element-5:hover{cursor:move;}#element-6{left:24.08931%;top:23.7053961%;width:20.365983200000002%;height:7.331154%;}#element-6:hover{cursor:move;}#element-7{left:19.0411866%;top:43.8973933%;width:36.46031%;height:5.6366384%;}#element-7:hover{cursor:move;}#element-8{left:6.1072880000000005%;top:23.310062300000002%;width:16.9334441%;height:8.722058%;}#element-8:hover{cursor:move;}#element-9{left:20.7536042%;top:35.941410000000005%;width:37.63979%;height:6.19232953%;}#element-9:hover{cursor:move;}</style>
 
 </head>
 
@@ -39,44 +39,43 @@
 
 <div class="test" id="element-0">
     
-    <label class="font-weight-bold">Forgot Password</label>
+    <label class="font-weight-bold">Gender:</label>
     
 </div>
 
 <div class="test" id="element-1">
     
-    <label class="font-weight-bold">Password</label>
+    <label class="font-weight-bold">Unrecognized Text</label>
     
 </div>
 
 <div class="test" id="element-2">
     
-    <label class="font-weight-bold">♡ Remember me</label>
+    <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unrecognized Text</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Action</a></div></div>
     
 </div>
 
 <div class="test" id="element-3">
     
-    <button style="width:100%;height:100%;" type="button" class="btn btn-info">I
-LOGIN</button>
+    <h1>PRODUCT NAME</h1>
     
 </div>
 
 <div class="test" id="element-4">
     
-    <label class="font-weight-bold">Password</label>
+    <button style="width:100%;height:100%;" type="button" class="btn btn-info">سطل</button>
     
 </div>
 
 <div class="test" id="element-5">
     
-    <label class="font-weight-bold">Login</label>
+    <label class="font-weight-bold">Name:</label>
     
 </div>
 
 <div class="test" id="element-6">
     
-    <input type="text" name="test" style="width:100%;height:100%;" class="form-control" aria-describedby="basic-addon1"><br>
+    <button style="width:100%;height:100%;" type="button" class="btn btn-info">Login</button>
     
 </div>
 
@@ -88,8 +87,13 @@ LOGIN</button>
 
 <div class="test" id="element-8">
     
-    <h1>Login
-Sign Up</h1>
+    <button style="width:100%;height:100%;" type="button" class="btn btn-info">Home</button>
+    
+</div>
+
+<div class="test" id="element-9">
+    
+    <input type="text" name="test" style="width:100%;height:100%;" class="form-control" aria-describedby="basic-addon1"><br>
     
 </div>
 
@@ -109,9 +113,9 @@ Sign Up</h1>
     }
 
     function drag_handler(component) {
-        var pos1 = 0 , pos2 = 0 , pos3 = 0 , pos4 = 0;
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         component.onmousedown = drag_handler_util;
-        function drag_handler_util(e){
+        function drag_handler_util(e) {
             e = e || window.event;
             e.preventDefault();
             pos3 = e.clientX;
@@ -119,7 +123,7 @@ Sign Up</h1>
             document.onmouseup = drag_exit_handler;
             document.onmousemove = drag_event_handler;
         }
-        function drag_event_handler(e){
+        function drag_event_handler(e) {
             e = e || window.event;
             e.preventDefault();
             pos1 = pos3 - e.clientX;
@@ -129,7 +133,7 @@ Sign Up</h1>
             component.style.top = (component.offsetTop - pos2) + "px";
             component.style.left = (component.offsetLeft - pos1) + "px";
         }
-        function drag_exit_handler(){
+        function drag_exit_handler() {
             document.onmouseup = null;
             document.onmousemove = null;
         }

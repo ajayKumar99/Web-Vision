@@ -199,6 +199,8 @@
                         </div>
                     </div>
                 </div>
+
+                <button class="btn btn-success" onclick="save_file();">Save</button>
             </div>
         </div>
 
@@ -225,6 +227,11 @@
             sliders[i].oninput = function () {
                 slider_handler(this.value, this.id)
             }
+        }
+
+        function save_file() {
+            var frame_data = document.getElementById("html_obj").contentWindow.document.documentElement.outerHTML;
+            console.log(frame_data);
         }
 
     </script>
