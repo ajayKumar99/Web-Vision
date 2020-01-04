@@ -105,3 +105,4 @@ venv.bak/
 slices/*
 service-account-file.json
 
+.vscode/
